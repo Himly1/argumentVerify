@@ -1,0 +1,13 @@
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:mysql://192.168.33.10:3306/hikedu?useSSL=false
+    username: root
+    password:
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+      hibernate:
+        ddl-auto: update
+      show-sql: true
