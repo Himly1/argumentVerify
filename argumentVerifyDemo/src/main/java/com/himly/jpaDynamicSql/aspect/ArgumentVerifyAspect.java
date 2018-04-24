@@ -19,8 +19,16 @@ import java.util.*;
 public class ArgumentVerifyAspect {
 
     @Before("execution(* com.himly.jpaDynamicSql.service.impl.*.*(..))")
-    public void args(JoinPoint joinPoint) throws Exception{
+    public void doArgumentVerifyForService(JoinPoint joinPoint) throws Exception{
+        try{
+            doArgumentVerify(joinPoint);
+        }catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 
+
+    private void doArgumentVerify(JoinPoint joinPoint) throws Exception{
         String methodName = joinPoint.getSignature().getName();
         Method method = getMethod(methodName,joinPoint);
         Object[] args = joinPoint.getArgs();
@@ -53,7 +61,6 @@ public class ArgumentVerifyAspect {
             ++i;
         }
     }
-
 
     private Method getMethod(String name, JoinPoint joinPoint) {
 
